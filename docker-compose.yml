@@ -1,5 +1,5 @@
 services:
-  website1:
+  zomato_app:
     build: ./zomato-web-app
     image: zomato-image
     container_name: zomato-cont
@@ -11,7 +11,7 @@ services:
     networks:  
       - my_network
 
-  website2:
+  amazon_app:
     build: ./Amazon-Clone
     image: amazon-image
     container_name: amazon-cont
