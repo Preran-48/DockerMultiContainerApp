@@ -1,32 +1,32 @@
 services:
   website1:
     build: ./zomato-web-app
-    image: website1-image
-    container_name: website1
+    image: zomato-image
+    container_name: zomato-cont
     ports:
       - "8081:80"
     volumes:  
-      - ./Amazon-clone:/app
+      - ./zomato-web-app:/usr/share/nginx/html   # bind mount (code)
+      - zomato_volume:/var/log/nginx             # external volume (logs)
     networks:  
       - my_network
-    depends_on:
-      - website2
 
   website2:
     build: ./Amazon-Clone
-    image: website2-image
-    container_name: website2
+    image: amazon-image
+    container_name: amazon-cont
     ports:
       - "8082:80"
     volumes:
-      - ./Amazon-clone:/app
+      - ./Amazon-Clone:/usr/share/nginx/html     # bind mount (code)
+      - amazon_volume:/var/log/nginx             # external volume (logs)
     networks:  
       - my_network
-
-volumes:  
-  my_volume:
-    driver: local
 
 networks:  
   my_network:
     driver: bridge
+
+volumes:
+  zomato_volume:
+  amazon_volume:
